@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'workout_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -44,13 +45,43 @@ class HomeScreen extends StatelessWidget {
                       color: CupertinoColors.systemGrey,
                     ),
                   ),
-
+                  SizedBox(height: 20),
+                  _buildMenuButton(
+                    context,
+                    icon: CupertinoIcons.flame_fill,
+                    text: "Start Workout",
+                    color: CupertinoColors.systemOrange,
+                    screen: WorkoutScreen(),
+                  ),
                 ],
               )
           ),
         )
     );
   }
+
+  Widget _buildMenuButton(BuildContext context, {
+    required IconData icon,
+    required String text,
+    required Color color,
+    required Widget screen,
+  }) {
+    return CupertinoButton(
+      padding: EdgeInsets.zero,
+      onPressed: () {
+        Navigator.push(
+            context, CupertinoPageRoute(builder: (context) => screen));
+      },
+      child: Container(
+
+      ),
+    );
+  }
 }
+
+
+
+
+
 
 

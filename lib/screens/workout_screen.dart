@@ -89,8 +89,29 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
                     onPressed: _addWorkout,
                   ),
               ],
-            )
-            )
+            ),
+            ),
+// Segmented Control (Active / Completed)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: CupertinoSegmentedControl<int>(
+                selectedColor: CupertinoColors.activeBlue,
+                borderColor: CupertinoColors.activeBlue,
+                unselectedColor: CupertinoColors.white,
+                children: {
+                  0: Padding(padding: EdgeInsets.all(8), child: Text("Active")),
+                  1: Padding(padding: EdgeInsets.all(8), child: Text("Completed")),
+                },
+                onValueChanged: (int value) {
+                  setState(() {
+                    _selectedSegment = value;
+                  });
+                },
+                groupValue: _selectedSegment,
+              ),
+            ),
+
+            SizedBox(height: 10),
             ],
           )
       ),

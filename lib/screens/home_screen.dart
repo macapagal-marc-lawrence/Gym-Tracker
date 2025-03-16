@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'workout_screen.dart';
-
+import 'workout_history_screen.dart';
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -53,6 +53,14 @@ class HomeScreen extends StatelessWidget {
                     color: CupertinoColors.systemOrange,
                     screen: WorkoutScreen(),
                   ),
+                   SizedBox(height: 10),
+              _buildMenuButton(
+                context,
+                icon: CupertinoIcons.time_solid,
+                text: "Workout History",
+                color: CupertinoColors.systemBlue,
+                screen: WorkoutHistoryScreen(),
+              ),
                 ],
               )
           ),

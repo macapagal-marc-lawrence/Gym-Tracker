@@ -44,10 +44,17 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
   }
 
   void _addWorkout() {
-    if (nameController.text.isNotEmpty) {
+    if (nameController.text.isNotEmpty&&
+        setsController.text.isNotEmpty &&
+        repsController.text.isNotEmpty &&
+        weightController.text.isNotEmpty) {
       setState(() {
         workouts.add({
           "name": nameController.text,
+          "sets": setsController.text,
+          "reps": repsController.text,
+          "weight": weightController.text,
+          "completed": false
         });
       });
       _saveWorkouts();

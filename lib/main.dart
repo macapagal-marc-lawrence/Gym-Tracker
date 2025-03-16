@@ -14,10 +14,14 @@ class GymTrackerApp extends StatelessWidget {
       title: "Gym Tracker",
       theme: CupertinoThemeData(
         brightness: Brightness.light,
-        primaryColor: CupertinoColors.activeBlue,
+        primaryColor: CupertinoColors.black, // Ensures black text
         barBackgroundColor: CupertinoColors.systemGrey6,
         textTheme: CupertinoTextThemeData(
-          textStyle: TextStyle(fontFamily: 'SF Pro', fontSize: 16),
+          textStyle: TextStyle(
+            fontFamily: 'SF Pro',
+            fontSize: 16,
+            color: CupertinoColors.black, // Ensures black text color
+          ),
         ),
       ),
       home: HomeScreen(),

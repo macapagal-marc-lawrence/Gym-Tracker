@@ -11,7 +11,14 @@ class HomeScreen extends StatelessWidget {
             ),
         ),
         child: Container(
-
+          width: double.infinity,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [CupertinoColors.systemGrey5, CupertinoColors.white],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
         )
     );
   }

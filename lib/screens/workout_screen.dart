@@ -208,20 +208,20 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
 
     return Container(
       padding: EdgeInsets.all(16),
-      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16), // Spacing around cards
+      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: isCompleted
-              ? [CupertinoColors.systemGreen.withOpacity(0.3), CupertinoColors.systemGreen.withOpacity(0.1)]
-              : [CupertinoColors.systemBlue.withOpacity(0.3), CupertinoColors.systemBlue.withOpacity(0.1)],
+              ? [CupertinoColors.systemGreen.withOpacity(0.4), CupertinoColors.systemGreen.withOpacity(0.2)]
+              : [CupertinoColors.systemBlue.withOpacity(0.4), CupertinoColors.systemBlue.withOpacity(0.2)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: CupertinoColors.black.withOpacity(0.08), // Softer shadow
-            blurRadius: 8,
+            color: CupertinoColors.black.withOpacity(0.1),
+            blurRadius: 6,
             offset: Offset(2, 3),
           ),
         ],
@@ -249,9 +249,9 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          color: CupertinoColors.black,
+                          color: CupertinoColors.black.withOpacity(0.9), // Improved visibility
                         ),
-                        overflow: TextOverflow.ellipsis, // Prevents text overflow
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ],
@@ -259,11 +259,11 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
                 SizedBox(height: 8),
                 Text(
                   "🔥 ${workout["sets"]} sets × ${workout["reps"]} reps",
-                  style: TextStyle(color: CupertinoColors.black.withOpacity(0.7), fontSize: 16),
+                  style: TextStyle(color: CupertinoColors.black.withOpacity(0.75), fontSize: 16),
                 ),
                 Text(
                   "🏋️ ${workout["weight"]} kg",
-                  style: TextStyle(color: CupertinoColors.black.withOpacity(0.7), fontSize: 16),
+                  style: TextStyle(color: CupertinoColors.black.withOpacity(0.75), fontSize: 16),
                 ),
               ],
             ),
@@ -274,14 +274,14 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
             CupertinoButton(
               padding: EdgeInsets.zero,
               child: AnimatedContainer(
-                duration: Duration(milliseconds: 200), // Smooth animation
+                duration: Duration(milliseconds: 200),
                 padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 decoration: BoxDecoration(
                   color: CupertinoColors.activeGreen,
                   borderRadius: BorderRadius.circular(8),
                   boxShadow: [
                     BoxShadow(
-                      color: CupertinoColors.systemGreen.withOpacity(0.4),
+                      color: CupertinoColors.systemGreen.withOpacity(0.5),
                       blurRadius: 6,
                       offset: Offset(2, 3),
                     ),

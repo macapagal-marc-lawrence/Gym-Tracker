@@ -73,9 +73,36 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
       child: SafeArea(
           child: Column(
             children: [
+            Padding(padding: EdgeInsets.all(16),
+            child: Column(
+              children: [
+              _buildTextField(nameController, "Workout Name", CupertinoIcons.flame),
+                  SizedBox(height: 10),
+              ],
+            )
+            )
             ],
           )
       ),
     );
   }
 }
+
+Widget _buildTextField(TextEditingController controller, String placeholder, IconData icon) {
+    return CupertinoTextField(
+      controller: controller,
+      placeholder: placeholder,
+      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 10),
+      decoration: BoxDecoration(
+        color: CupertinoColors.systemGrey6,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      prefix: Padding(
+        padding: EdgeInsets.only(left: 10),
+        child: Icon(icon, color: CupertinoColors.systemGrey),
+      ),
+      keyboardType: placeholder.contains("Weight") || placeholder.contains("Sets") || placeholder.contains("Reps")
+          ? TextInputType.numberWithOptions(decimal: true)
+          : TextInputType.text,
+    );
+  }

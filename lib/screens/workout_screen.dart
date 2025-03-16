@@ -172,7 +172,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
   }
 
 
-Widget _buildTextField(TextEditingController controller, String placeholder, IconData icon) {
+  Widget _buildTextField(TextEditingController controller, String placeholder, IconData icon) {
     return CupertinoTextField(
       controller: controller,
       placeholder: placeholder,
@@ -181,6 +181,7 @@ Widget _buildTextField(TextEditingController controller, String placeholder, Ico
         color: CupertinoColors.systemGrey6,
         borderRadius: BorderRadius.circular(10),
       ),
+      style: TextStyle(color: CupertinoColors.black), // Ensures black text color
       prefix: Padding(
         padding: EdgeInsets.only(left: 10),
         child: Icon(icon, color: CupertinoColors.systemGrey),
@@ -190,6 +191,7 @@ Widget _buildTextField(TextEditingController controller, String placeholder, Ico
           : TextInputType.text,
     );
   }
+
 
    Widget _buildWorkoutCard(Map<String, dynamic> workout, int index) {
     return Container(

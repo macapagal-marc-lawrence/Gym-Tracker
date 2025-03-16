@@ -38,6 +38,22 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
     }
   }
 
+  Future<void> _saveWorkouts() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('workouts', json.encode(workouts));
+  }
+
+  void _addWorkout() {
+    if (nameController.text.isNotEmpty) {
+      setState(() {
+        workouts.add({
+          "name": nameController.text,
+        });
+      });
+      _saveWorkouts();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> displayedWorkouts =

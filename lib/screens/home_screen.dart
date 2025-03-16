@@ -87,12 +87,12 @@ class HomeScreen extends StatelessWidget {
           color: color,
           borderRadius: BorderRadius.circular(30),
           boxShadow: [
-            BoxShadow(
-              color: CupertinoColors.black.withOpacity(0.2),
-              blurRadius: 10,
-              offset: Offset(0, 4),
-            ),
-          ],
+          BoxShadow(
+            color: CupertinoColors.systemGrey.withOpacity(0.3), // Softer, more natural shadow
+            blurRadius: 10,
+            offset: Offset(0, 4),
+          ),
+        ],
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min, // Prevents unnecessary stretching

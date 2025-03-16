@@ -81,7 +81,19 @@ class HomeScreen extends StatelessWidget {
             context, CupertinoPageRoute(builder: (context) => screen));
       },
       child: Container(
-
+width: 280,
+        padding: EdgeInsets.symmetric(vertical: 14),
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(30),
+          boxShadow: [
+            BoxShadow(
+              color: CupertinoColors.black.withOpacity(0.2),
+              blurRadius: 10,
+              offset: Offset(0, 4),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -53,3 +53,19 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen> {
   }
 }
 
+/// Widget to display a completed workout card
+  Widget _buildWorkoutCard(Map<String, dynamic> workout) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 12),
+      padding: EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: CupertinoColors.systemGrey5,
+        borderRadius: BorderRadius.circular(12),
+      ),
+    );
+  }
+
+/// Widget for empty history state
+  Widget _buildEmptyState() {
+return Center();
+  }

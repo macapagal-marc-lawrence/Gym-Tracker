@@ -58,7 +58,29 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
         });
       });
       _saveWorkouts();
+   _clearFields();
     }
+  }
+
+  void _markAsCompleted(int index) {
+    setState(() {
+      workouts[index]["completed"] = true;
+    });
+    _saveWorkouts();
+  }
+
+  void _deleteWorkout(int index) {
+    setState(() {
+      workouts.removeAt(index);
+    });
+    _saveWorkouts();
+  }
+
+  void _clearFields() {
+    nameController.clear();
+    setsController.clear();
+    repsController.clear();
+    weightController.clear();
   }
 
   @override
@@ -112,12 +134,43 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
             ),
 
             SizedBox(height: 10),
+
+              // Workout List
+            Expanded(
+              child: displayedWorkouts.isEmpty
+                  ? Center(
+                child: Text(
+                  "No workouts yet!",
+                  style: TextStyle(color: CupertinoColors.systemGrey),
+                ),
+              )
+                  : ListView.builder(
+                itemCount: displayedWorkouts.length,
+                itemBuilder: (context, index) {
+                  return Dismissible(
+                    key: Key(displayedWorkouts[index]["name"]),
+                    background: Container(
+                      alignment: Alignment.centerRight,
+                      padding: EdgeInsets.only(right: 20),
+                      color: CupertinoColors.systemRed,
+                      child: Icon(CupertinoIcons.delete, color: CupertinoColors.white),
+                    ),
+                    direction: DismissDirection.endToStart,
+                    onDismissed: (_) => _deleteWorkout(index),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      child: _buildWorkoutCard(displayedWorkouts[index], index),
+                    ),
+                  );
+                },
+              ),
+            ),
             ],
-          )
+          ),
       ),
     );
   }
-}
+
 
 Widget _buildTextField(TextEditingController controller, String placeholder, IconData icon) {
     return CupertinoTextField(
@@ -137,3 +190,47 @@ Widget _buildTextField(TextEditingController controller, String placeholder, Ico
           : TextInputType.text,
     );
   }
+
+   Widget _buildWorkoutCard(Map<String, dynamic> workout, int index) {
+    return Container(
+      padding: EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: workout["completed"]
+            ? CupertinoColors.systemGreen.withOpacity(0.2)
+            : CupertinoColors.systemBlue.withOpacity(0.2),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                workout["name"],
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 4),
+              Text("${workout["sets"]} sets × ${workout["reps"]} reps"),
+              Text("${workout["weight"]} kg"),
+            ],
+          ),
+          Row(
+            children: [
+              if (!workout["completed"])
+                CupertinoButton(
+                  padding: EdgeInsets.zero,
+                  child: Icon(
+                    CupertinoIcons.check_mark_circled,
+                    color: CupertinoColors.activeBlue,
+                    size: 30,
+                  ),
+                  onPressed: () => _markAsCompleted(index),
+                ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}

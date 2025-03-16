@@ -53,14 +53,14 @@ class HomeScreen extends StatelessWidget {
                     color: CupertinoColors.systemOrange,
                     screen: WorkoutScreen(),
                   ),
-                   SizedBox(height: 10),
-              _buildMenuButton(
-                context,
-                icon: CupertinoIcons.time_solid,
-                text: "Workout History",
-                color: CupertinoColors.systemBlue,
-                screen: WorkoutHistoryScreen(),
-              ),
+                  SizedBox(height: 10),
+                  _buildMenuButton(
+                    context,
+                    icon: CupertinoIcons.time_solid,
+                    text: "Workout History",
+                    color: CupertinoColors.systemBlue,
+                    screen: WorkoutHistoryScreen(),
+                  ),
                 ],
               )
           ),
@@ -81,8 +81,8 @@ class HomeScreen extends StatelessWidget {
             context, CupertinoPageRoute(builder: (context) => screen));
       },
       child: Container(
-width: 280,
-        padding: EdgeInsets.symmetric(vertical: 14),
+        width: 280, // Button width
+        padding: EdgeInsets.symmetric(vertical: 14, horizontal: 16),
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(30),
@@ -95,16 +95,22 @@ width: 280,
           ],
         ),
         child: Row(
+          mainAxisSize: MainAxisSize.min, // Prevents unnecessary stretching
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(icon, color: CupertinoColors.white, size: 24),
-            SizedBox(width: 10),
-            Text(
-              text,
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-                color: CupertinoColors.white,
+            SizedBox(width: 8), // Space between icon and text
+            Expanded( // Prevents text overflow
+              child: Text(
+                text,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: CupertinoColors.white,
+                ),
+                overflow: TextOverflow.ellipsis,
+                // Ensures text doesn't overflow
+                textAlign: TextAlign.center,
               ),
             ),
           ],
@@ -113,10 +119,3 @@ width: 280,
     );
   }
 }
-
-
-
-
-
-
-

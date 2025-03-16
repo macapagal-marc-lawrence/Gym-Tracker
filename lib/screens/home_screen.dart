@@ -37,6 +37,13 @@ class HomeScreen extends StatelessWidget {
                   color: CupertinoColors.black,
                 ),
               ),
+                  Text(
+                "Stay fit by logging your workouts!",
+                style: TextStyle(
+                  fontSize: 16,
+                  color: CupertinoColors.systemGrey,
+                ),
+              ),
                 ],
               )
           ),

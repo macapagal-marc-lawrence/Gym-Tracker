@@ -7,7 +7,7 @@ class WorkoutScreen extends StatefulWidget {
  _WorkoutScreenState createState()=> _WorkoutScreenState();
 }
 
-class _WorkoutScreenState extends State<WorkoutScreen>{
+class _WorkoutScreenState extends State<WorkoutScreen> {
   List<Map<String, dynamic>> workouts = [];
   TextEditingController nameController = TextEditingController();
   TextEditingController setsController = TextEditingController();
@@ -21,13 +21,15 @@ class _WorkoutScreenState extends State<WorkoutScreen>{
     super.initState();
     _loadWorkouts();
   }
-Future<void> _loadWorkouts() async {
+
+  Future<void> _loadWorkouts() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? storedWorkouts = prefs.getString('workouts');
     if (storedWorkouts != null) {
       try {
         setState(() {
-          workouts = List<Map<String, dynamic>>.from(json.decode(storedWorkouts));
+          workouts =
+          List<Map<String, dynamic>>.from(json.decode(storedWorkouts));
         });
       } catch (e) {
         print("Error loading workouts: $e");
@@ -38,8 +40,19 @@ Future<void> _loadWorkouts() async {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
-  }
+    List<Map<String, dynamic>> displayedWorkouts =
+    workouts.where((w) => w["completed"] == (_selectedSegment == 1)).toList();
 
+    return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        middle: Text("Workout Tracker"),
+      ),
+      child: SafeArea(
+          child: Column(
+            children: [
+            ],
+          )
+      ),
+    );
+  }
 }

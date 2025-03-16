@@ -78,6 +78,16 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
               children: [
               _buildTextField(nameController, "Workout Name", CupertinoIcons.flame),
                   SizedBox(height: 10),
+                _buildTextField(setsController, "Sets", CupertinoIcons.repeat),
+                  SizedBox(height: 10),
+                  _buildTextField(repsController, "Reps", CupertinoIcons.hand_thumbsup),
+                  SizedBox(height: 10),
+                  _buildTextField(weightController, "Weight (kg)", CupertinoIcons.chart_bar_alt_fill),
+                  SizedBox(height: 15),
+                  CupertinoButton.filled(
+                    child: Text("Add Workout"),
+                    onPressed: _addWorkout,
+                  ),
               ],
             )
             )

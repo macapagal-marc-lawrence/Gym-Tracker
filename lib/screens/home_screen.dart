@@ -4,11 +4,11 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-        navigationBar:CupertinoNavigationBar(
-            middle: Text(
-              "Gym Workout Tracker",
-                style: TextStyle(fontWeight: FontWeight.bold),
-            ),
+        navigationBar: CupertinoNavigationBar(
+          middle: Text(
+            "Gym Workout Tracker",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
         ),
         child: Container(
           width: double.infinity,
@@ -21,7 +21,7 @@ class HomeScreen extends StatelessWidget {
           ),
           child: SafeArea(
               child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
                     CupertinoIcons.square_stack_3d_down_right_fill,
@@ -29,21 +29,21 @@ class HomeScreen extends StatelessWidget {
                     size: 50,
                   ),
                   SizedBox(height: 10),
-              Text(
-                "Track Your Progress 💪",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: CupertinoColors.black,
-                ),
-              ),
                   Text(
-                "Stay fit by logging your workouts!",
-                style: TextStyle(
-                  fontSize: 16,
-                  color: CupertinoColors.systemGrey,
-                ),
-              ),
+                    "Track Your Progress 💪",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: CupertinoColors.black,
+                    ),
+                  ),
+                  Text(
+                    "Stay fit by logging your workouts!",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: CupertinoColors.systemGrey,
+                    ),
+                  ),
                 ],
               )
           ),
@@ -51,3 +51,5 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
+

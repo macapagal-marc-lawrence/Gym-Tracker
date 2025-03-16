@@ -19,6 +19,27 @@ class HomeScreen extends StatelessWidget {
               end: Alignment.bottomCenter,
             ),
           ),
+          child: SafeArea(
+              child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    CupertinoIcons.square_stack_3d_down_right_fill,
+                    color: CupertinoColors.activeBlue,
+                    size: 50,
+                  ),
+                  SizedBox(height: 10),
+              Text(
+                "Track Your Progress 💪",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: CupertinoColors.black,
+                ),
+              ),
+                ],
+              )
+          ),
         )
     );
   }

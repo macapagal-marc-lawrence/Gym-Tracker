@@ -94,5 +94,26 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen> {
 
 /// Widget for empty history state
   Widget _buildEmptyState() {
-return Center();
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(CupertinoIcons.doc_text_search, size: 80, color: CupertinoColors.systemGrey),
+          SizedBox(height: 16),
+          Text(
+            "No completed workouts yet!",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: CupertinoColors.systemGrey),
+          ),
+          SizedBox(height: 8),
+          Text(
+            "Start a workout and complete it to see history here.",
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 14, color: CupertinoColors.systemGrey2),
+          ),
+
+        ],
+
+      ),
+    );
+
   }

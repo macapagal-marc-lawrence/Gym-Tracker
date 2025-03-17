@@ -62,6 +62,33 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen> {
         color: CupertinoColors.systemGrey5,
         borderRadius: BorderRadius.circular(12),
       ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(CupertinoIcons.flame_fill, color: CupertinoColors.activeOrange, size: 32),
+            SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    workout["name"],
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  SizedBox(height: 4),
+                  Text(
+                    "${workout["sets"]} sets × ${workout["reps"]} reps",
+                    style: TextStyle(fontSize: 14, color: CupertinoColors.systemGrey),
+                  ),
+                ],
+              ),
+            ),
+            Text(
+              "${workout["weight"]} kg",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+          ],
+      )
     );
   }
 

@@ -1,4 +1,4 @@
-# devops_midterm
+# GymTracker
 
 A new Flutter project.
 

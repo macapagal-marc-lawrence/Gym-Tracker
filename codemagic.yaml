@@ -51,7 +51,7 @@ workflows:
 
     publishing:
       google_play:
-        credentials: /tmp/google-credentials.json  # Correct path for authentication
+        credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
         track: internal
         in_app_update_priority: 3
         submit_as_draft: false

@@ -31,19 +31,20 @@ android {
     }
 
     signingConfigs {
-        create("release") {
-            storeFile = file(keystoreProperties["storeFile"] as String)
-            storePassword = keystoreProperties["storePassword"] as String
-            keyAlias = keystoreProperties["keyAlias"] as String
-            keyPassword = keystoreProperties["keyPassword"] as String
+        release {
+            storeFile file("keystore.jks")
+            storePassword project.property("storePassword")
+            keyAlias project.property("keyAlias")
+            keyPassword project.property("keyPassword")
         }
     }
 
     buildTypes {
-        getByName("release") {
-            signingConfig = signingConfigs.getByName("release")
+        release {
+            signingConfig signingConfigs.release
         }
     }
+
 }
 
 flutter {

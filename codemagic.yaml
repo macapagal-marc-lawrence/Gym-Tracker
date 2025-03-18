@@ -8,6 +8,7 @@ workflows:
         - KEYSTORE_CREDENTIALS
       vars:
         PACKAGE_NAME: "com.example.GymTracker"
+
     scripts:
       - name: Install dependencies
         script: |
@@ -16,11 +17,11 @@ workflows:
 
       - name: Decode Keystore
         script: |
-          echo $CM_KEYSTORE | base64 --decode > /tmp/keystore.jks
+          echo $CM_KEYSTORE | base64 --decode > android/app/keystore.jks
 
       - name: Set up Google Play authentication
         script: |
-          echo $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS > /tmp/google-credentials.json
+          echo "$GCLOUD_SERVICE_ACCOUNT_CREDENTIALS" > /tmp/google-credentials.json
 
       - name: Configure signing properties
         script: |
@@ -28,8 +29,12 @@ workflows:
           storePassword=$KEYSTORE_PASSWORD
           keyPassword=$KEY_PASSWORD
           keyAlias=$KEY_ALIAS
-          storeFile=/tmp/keystore.jks
+          storeFile=android/app/keystore.jks
           EOF
+
+      - name: Verify Keystore
+        script: |
+          keytool -list -keystore android/app/keystore.jks -storepass $KEYSTORE_PASSWORD -v
 
       - name: Run tests
         script: flutter test
@@ -46,7 +51,7 @@ workflows:
 
     publishing:
       google_play:
-        credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
-        track: beta
+        credentials: /tmp/google-credentials.json  # Correct path for authentication
+        track: internal
         in_app_update_priority: 3
         submit_as_draft: false

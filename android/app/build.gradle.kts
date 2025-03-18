@@ -31,17 +31,17 @@ android {
     }
 
     signingConfigs {
-        release {
-            storeFile file("android/app/keystore.jks")
-            storePassword System.getenv("KEYSTORE_PASSWORD") ?: project.property("KEYSTORE_PASSWORD").toString()
-            keyAlias System.getenv("KEY_ALIAS") ?: project.property("KEY_ALIAS").toString()
-            keyPassword System.getenv("KEY_PASSWORD") ?: project.property("KEY_PASSWORD").toString()
+        create("release") {
+            storeFile = file(keystoreProperties["storeFile"] as String)
+            storePassword = keystoreProperties["storePassword"] as String
+            keyAlias = keystoreProperties["keyAlias"] as String
+            keyPassword = keystoreProperties["keyPassword"] as String
         }
     }
 
     buildTypes {
-        release {
-            signingConfig signingConfigs.release
+        getByName("release") {
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 }

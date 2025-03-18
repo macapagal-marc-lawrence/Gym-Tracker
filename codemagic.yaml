@@ -4,7 +4,7 @@ workflows:
     environment:
       flutter: stable
       android_signing:
-        - keystore_reference
+        - CM_KEYSTORE
       groups:
         - KEYSTORE_CREDENTIALS
     scripts:

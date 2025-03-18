@@ -29,29 +29,32 @@ android {
         jvmTarget = JavaVersion.VERSION_11.toString()
     }
 
-    defaultConfig {
-        applicationId = "com.example.GymTracker"
-        minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
-        versionCode = flutter.versionCode
-        versionName = flutter.versionName
-    }
-
-    signingConfigs {
-        create("release") {
-            storeFile = file(keystoreProperties["storeFile"] as String)
-            storePassword = keystoreProperties["storePassword"] as String
-            keyAlias = keystoreProperties["keyAlias"] as String
-            keyPassword = keystoreProperties["keyPassword"] as String
+    val keystoreProperties = Properties().apply {
+        val file = rootProject.file("key.properties")
+        if (file.exists()) {
+            load(FileInputStream(file))
+        } else {
+            println("⚠️ Warning: key.properties file not found! Using default values.")
         }
     }
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            signingConfig = signingConfigs.getByName("release")
+    android {
+        signingConfigs {
+            create("release") {
+                storeFile = file(keystoreProperties["storeFile"] as String?)
+                storePassword = keystoreProperties["storePassword"] as String?
+                keyAlias = keystoreProperties["keyAlias"] as String?
+                keyPassword = keystoreProperties["keyPassword"] as String?
+            }
+        }
+
+        buildTypes {
+            release {
+                signingConfig = signingConfigs.getByName("release")
+            }
         }
     }
+
 }
 
 flutter {

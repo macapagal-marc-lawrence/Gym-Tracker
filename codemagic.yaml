@@ -1,17 +1,51 @@
 workflows:
-  android-ci-cd:
-    name: Android CI/CD Workflow
+  android-release:
+    name: Android Release Build
+    instance_type: mac_mini_m2
     environment:
       flutter: stable
+      groups:
+        - KEYSTORE_CREDENTIALS
+      vars:
+        PACKAGE_NAME: "com.example.GymTracker"
     scripts:
       - name: Install dependencies
-        script: flutter pub get
+        script: |
+          flutter clean
+          flutter pub get
+
+      - name: Decode Keystore
+        script: |
+          echo $CM_KEYSTORE | base64 --decode > /tmp/keystore.jks
+
+      - name: Set up Google Play authentication
+        script: |
+          echo $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS | base64 --decode > /tmp/google-credentials.json
+
+      - name: Configure signing properties
+        script: |
+          echo "storePassword=$KEYSTORE_PASSWORD" > android/key.properties
+          echo "keyPassword=$KEY_PASSWORD" >> android/key.properties
+          echo "keyAlias=$KEY_ALIAS" >> android/key.properties
+          echo "storeFile=/tmp/keystore.jks" >> android/key.properties
+
       - name: Run tests
         script: flutter test
-      - name: Build APK
+
+      - name: Build Signed APK
         script: flutter build apk --release
-      - name: Build AAB (for Play Store)
+
+      - name: Build Signed AAB
         script: flutter build appbundle --release
+
     artifacts:
       - build/app/outputs/flutter-apk/app-release.apk
       - build/app/outputs/bundle/release/app-release.aab
+
+    publishing:
+      google_play:
+        credentials: /tmp/google-credentials.json
+        track: internal
+        in_app_update_priority: 3
+        submit_as_draft: false
+        artifact_type: bundle

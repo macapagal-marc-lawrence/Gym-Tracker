@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.devops_midterm"
+    namespace = "com.example.GymTracker"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -21,7 +21,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.devops_midterm"
+        applicationId = "com.example.GymTracker"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
@@ -32,10 +32,10 @@ android {
 
     signingConfigs {
         release {
-            storeFile file("keystore.jks")
-            storePassword project.property("storePassword")
-            keyAlias project.property("keyAlias")
-            keyPassword project.property("keyPassword")
+            storeFile file("android/app/keystore.jks")
+            storePassword System.getenv("KEYSTORE_PASSWORD") ?: project.property("KEYSTORE_PASSWORD").toString()
+            keyAlias System.getenv("KEY_ALIAS") ?: project.property("KEY_ALIAS").toString()
+            keyPassword System.getenv("KEY_PASSWORD") ?: project.property("KEY_PASSWORD").toString()
         }
     }
 
@@ -44,7 +44,6 @@ android {
             signingConfig signingConfigs.release
         }
     }
-
 }
 
 flutter {

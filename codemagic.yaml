@@ -20,14 +20,16 @@ workflows:
 
       - name: Set up Google Play authentication
         script: |
-          echo $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS | base64 --decode > /tmp/google-credentials.json
+          echo $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS > /tmp/google-credentials.json
 
       - name: Configure signing properties
         script: |
-          echo "storePassword=$KEYSTORE_PASSWORD" > android/key.properties
-          echo "keyPassword=$KEY_PASSWORD" >> android/key.properties
-          echo "keyAlias=$KEY_ALIAS" >> android/key.properties
-          echo "storeFile=/tmp/keystore.jks" >> android/key.properties
+          cat <<EOF > android/key.properties
+          storePassword=$KEYSTORE_PASSWORD
+          keyPassword=$KEY_PASSWORD
+          keyAlias=$KEY_ALIAS
+          storeFile=/tmp/keystore.jks
+          EOF
 
       - name: Run tests
         script: flutter test
@@ -44,8 +46,7 @@ workflows:
 
     publishing:
       google_play:
-        credentials: /tmp/google-credentials.json
-        track: internal
+        credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
+        track: beta
         in_app_update_priority: 3
         submit_as_draft: false
-        artifact_type: bundle

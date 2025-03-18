@@ -11,8 +11,11 @@ import java.util.Properties
 val keystorePropertiesFile = rootProject.file("android/key.properties")
 val keystoreProperties = Properties()
 
+// Load the keystore properties from the file if it exists
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+} else {
+    println("⚠️ Warning: key.properties file not found! Using default values.")
 }
 
 android {
@@ -29,32 +32,30 @@ android {
         jvmTarget = JavaVersion.VERSION_11.toString()
     }
 
-    val keystoreProperties = Properties().apply {
-        val file = rootProject.file("key.properties")
-        if (file.exists()) {
-            load(FileInputStream(file))
-        } else {
-            println("⚠️ Warning: key.properties file not found! Using default values.")
+    defaultConfig {
+        applicationId = "com.example.GymTracker"
+        minSdk = 21
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+    }
+
+    signingConfigs {
+        create("release") {
+            // Ensure the keystore properties are valid before using them
+            storeFile = keystoreProperties["storeFile"]?.let { file(it as String) }
+            storePassword = keystoreProperties["storePassword"] as String?
+            keyAlias = keystoreProperties["keyAlias"] as String?
+            keyPassword = keystoreProperties["keyPassword"] as String?
         }
     }
 
-    android {
-        signingConfigs {
-            create("release") {
-                storeFile = file(keystoreProperties["storeFile"] as String?)
-                storePassword = keystoreProperties["storePassword"] as String?
-                keyAlias = keystoreProperties["keyAlias"] as String?
-                keyPassword = keystoreProperties["keyPassword"] as String?
-            }
-        }
-
-        buildTypes {
-            release {
-                signingConfig = signingConfigs.getByName("release")
-            }
+    buildTypes {
+        release {
+            isMinifyEnabled = false
+            signingConfig = signingConfigs.getByName("release")
         }
     }
-
 }
 
 flutter {

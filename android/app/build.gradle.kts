@@ -50,7 +50,8 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false  // Disable code shrinking
+            isMinifyEnabled = true  // Enables code shrinking and minification
+            shrinkResources = true  // Enables resource shrinking (removes unused resources)
             signingConfig = signingConfigs.getByName("release")
         }
     }

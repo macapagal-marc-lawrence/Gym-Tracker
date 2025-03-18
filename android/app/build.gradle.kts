@@ -40,9 +40,9 @@ android {
     signingConfigs {
         create("release") {
             storeFile = file("keystore.jks")
-            storePassword = keystoreProperties["storePassword"] as String
-            keyAlias = keystoreProperties["keyAlias"] as String
-            keyPassword = keystoreProperties["keyPassword"] as String
+            storePassword = keystoreProperties("storePassword")
+            keyAlias = keystoreProperties("keyAlias")
+            keyPassword = keystoreProperties("keyPassword")
         }
     }
 

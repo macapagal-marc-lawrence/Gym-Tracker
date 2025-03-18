@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
 }
 
@@ -10,6 +11,7 @@ import java.util.Properties
 val keystorePropertiesFile = rootProject.file("android/key.properties")
 val keystoreProperties = Properties()
 
+// Load the keystore properties from the file if it exists
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 } else {
@@ -40,6 +42,7 @@ android {
 
     signingConfigs {
         create("release") {
+            // Ensure the keystore properties are valid before using them
             storeFile = keystoreProperties["storeFile"]?.let { file(it as String) }
             storePassword = keystoreProperties["storePassword"] as String?
             keyAlias = keystoreProperties["keyAlias"] as String?
@@ -49,7 +52,8 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false  // Disable code shrinking
+            isMinifyEnabled = true  // Enable this if you want to shrink code
+            shrinkResources = true  // Set to true if you want to shrink unused resources
             signingConfig = signingConfigs.getByName("release")
         }
     }

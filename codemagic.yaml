@@ -31,6 +31,7 @@ workflows:
           keyAlias=${KEY_ALIAS}
           storeFile=android/app/keystore.jks
           EOF
+      
 
       - name: Verify Keystore
         script: |

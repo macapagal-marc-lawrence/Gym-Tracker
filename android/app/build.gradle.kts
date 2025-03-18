@@ -5,6 +5,10 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
+def keystorePropertiesFile= rootProject.file("key.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 
 android {
     namespace = "com.example.GymTracker"
@@ -29,17 +33,19 @@ android {
     }
 
     signingConfigs {
-        release {
-            storeFile file("keystore.jks")
-            storePassword project.property("storePassword")
-            keyAlias project.property("keyAlias")
-            keyPassword project.property("keyPassword")
+
+        config {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
         }
     }
 
     buildTypes {
         release {
-            signingConfig signingConfigs.release
+            //...
+            signingConfig signingConfigs.config
         }
     }
 }

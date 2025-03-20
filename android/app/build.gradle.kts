@@ -1,20 +1,8 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
-}
-
-import java.util.Properties
-        import java.io.FileInputStream
-
-val keystorePropertiesFile = rootProject.file("android/key.properties")
-val keystoreProperties = Properties()
-
-// Load the keystore properties from the file if it exists
-if (keystorePropertiesFile.exists()) {
-    keystoreProperties.load(FileInputStream(keystorePropertiesFile))
-} else {
-    println("⚠️ Warning: key.properties file not found! Using default values.")
 }
 
 android {
@@ -33,7 +21,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.GymTracker"
-        minSdk = 21
+        minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
@@ -41,17 +29,17 @@ android {
 
     signingConfigs {
         create("release") {
-            storeFile = keystoreProperties["storeFile"]?.let { file(it as String) }
-            storePassword = keystoreProperties["storePassword"] as String?
-            keyAlias = keystoreProperties["keyAlias"] as String?
-            keyPassword = keystoreProperties["keyPassword"] as String?
+            storeFile = file(System.getenv("KEYSTORE_PATH") ?: "android/app/keystore.jks")
+            storePassword = System.getenv("KEYSTORE_PASSWORD") ?: ""
+            keyAlias = System.getenv("KEY_ALIAS") ?: ""
+            keyPassword = System.getenv("KEY_PASSWORD") ?: ""
         }
     }
 
     buildTypes {
         release {
             isMinifyEnabled = true  // Enables code shrinking and minification
-            shrinkResources = true  // Enables resource shrinking (removes unused resources)
+            shrinkResources = true  // Removes unused resources to reduce app size
             signingConfig = signingConfigs.getByName("release")
         }
     }

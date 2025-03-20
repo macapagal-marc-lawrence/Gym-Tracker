@@ -5,7 +5,7 @@
         android:label="GymTracker">
 
         <activity
-            android:name=".MainActivity"
+            android:name="com.gymtracker.app.MainActivity">
             android:exported="true">
 
             <meta-data

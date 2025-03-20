@@ -5,10 +5,10 @@
         android:label="GymTracker">
 
         <activity
-            android:name="com.gymtracker.app.MainActivity">
+            android:name=".MainActivity"
             android:exported="true">
 
-            <meta-data
+        <meta-data
                 android:name="io.flutter.embedding.android.NormalTheme"
                 android:resource="@style/NormalTheme"/>
 

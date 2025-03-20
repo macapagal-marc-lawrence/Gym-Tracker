@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.GymTracker"
+    namespace = "com.gymtracker.app"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = "27.0.12077973"
 
@@ -20,7 +20,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.GymTracker"
+        applicationId = "com.gymtracker.app"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode

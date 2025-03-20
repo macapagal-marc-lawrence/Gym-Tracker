@@ -1,11 +1,10 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.gymtracker.app">  <!-- Make sure this matches your actual package name -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.gymtracker.app">
 
     <application
         android:label="GymTracker">
 
         <activity
-            android:name="com.gymtracker.app.MainActivity"
+            android:name=".MainActivity"
             android:exported="true">
 
         <meta-data

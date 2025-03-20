@@ -1,10 +1,11 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.GymTracker">  <!-- Make sure this matches your actual package name -->
+
     <application
-        android:label="GymTracker"
-        >
+        android:label="GymTracker">
 
         <activity
-            android:name="com.example.GymTracker.MainActivity"
+            android:name=".MainActivity"
             android:exported="true">
 
             <meta-data
